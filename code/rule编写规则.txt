@@ -1,0 +1,60 @@
+用@标识接下来的内容：
+
+@RULE (rule名称)
+@colors (颜色)
+@icons (形状)
+@Table (table 方式编写的规则)
+@tree (tree方式编写的规则(不讨论))
+
+============================
+@rule <NAME> 标识rule的名字(应与文件名相同)
+必须放在第一行，然后注释
+
+如:BW.rule
+@RULE BW
+BuildWire
+
+============================
+@color 标识细胞的颜色
+<细胞编号> <红色0~255> <绿色0~255> <蓝色0~255>
+
+如：
+@COLOR
+0 0 0 0
+1 0 0 255
+2 255 0 0
+
+============================
+@Table 用标识TABLE方式编写
+n_states:<细胞数量n(0~n-1)(最大255)>
+neighborhood:<邻居(范围)(vonNeumann 或 Moore)>范围指可以决定该细胞状态的细胞范围
+symmetries:<对称性("none","rotate4","rotate8","reflect","rotate4reflect","rotate8reflect")>
+
+如：
+n_states:7
+neighborhood:Moore
+symmetries:rotate4reflect
+
+============================
+# Format: C,N,E,S,W,C'
+
+vonNeumann:
+c(自己),n,e,s,w(北,东,南,西),c'(新状态)
+如：
+1,1,0,0,0,0
+
+    n
+w c e
+    s
+
+
+Moore:
+c,n,ne,e,se,s,sw,w,wn,c'(新状态)
+如:
+1,1,1,0,0,0,0,0,0,0
+
+nw n ne
+  w c e
+sw s se
+
+============================
